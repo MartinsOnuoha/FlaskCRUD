@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+<style type="text/css">
+body {
+	margin-top: 30px;
+	font-family: 'Ubuntu', sans-serif;
+	text-align: center;
+	background: silver;
+}
+.input-box {
+	height: 30px;
+	width: 50%;
+	border: 0;
+	border-top: 1px dashed grey;
+	border-bottom: 1px dashed grey;
+	color: green !important;
+	padding-left: 30px;
+}
+.submit {
+	padding: 10px;
+	width: 10em;
+	cursor: pointer;
+	margin-top: 10px;
+	border: 0;
+	color: #fff;
+}
+#update {
+	background: blue;
+}
+.submit:hover {
+	box-shadow: 2px  2px 10px #000;
+}
+.books {
+	background: #E0E0E0;
+	padding: 15px;
+	margin-top: 10px;
+	color: grey;
+	margin-right: 10em;
+	margin-left: 10em;
+	border-radius: 10px 50px;
+	font-size: 20px;
+}
+.container {
+	margin-top: 20px;
+}
+#delete {
+	background: #6D6D6D; 
+}
+</style>
+</head>
+<body>
+<form method="POST" action="/">
+	<input class="input-box" type="text" name="title" placeholder="Enter a Book title"> <br />
+	<input class="submit" type="submit" name="submit" value="Add">
+</form>
+<div class="container">
+
+<div class="header">
+<h1>Books</h1>
+</div>
+{% for book in books %}
+
+	<div class="books"><ul><li>{{book.title}}</li></ul>
+		<form method="POST" action="./update">
+			<input type="hidden" value="{{book.title}}" name="oldtitle">
+			<input class="input-box" type="text" value="{{book.title}}" name="newtitle">
+			<input class="submit" id="update" type="submit" value="Update">
+		</form>
+		<form method="POST" action="./delete">
+			<input type="hidden" value="{{book.title}}" name="title">
+			<input class="submit" id="delete" type="submit" value="Delete" name="submit">
+		</form>
+	</div>
+
+{% endfor %}
+</div>
+
+</body>
+</html>
